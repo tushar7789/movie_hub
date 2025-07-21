@@ -1,0 +1,6 @@
+.content-container {
+    display: flex;
+    height: 80vh;
+    width: 95vw;
+    border: 1px solid yellow;
+}
