@@ -1,10 +1,21 @@
 import React from 'react'
 import './style.css'
 
+import SearchBarComp from '../SearchBarComp'
+import IconImage from '../../../public/images/icon.svg'
+
+const iconStyle = {
+    width: "20px",
+    height: "20px",
+    marginLeft: "5px",
+}
+
 const Icon = () => {
+    console.log(IconImage);
     return (
         <div className='icon-container'>
-            Icon
+            <span>MovieHub</span>
+            <img src={IconImage.src} alt="" style={iconStyle} />
         </div>
     )
 }
@@ -12,7 +23,7 @@ const Icon = () => {
 const SearchBar = () => {
     return (
         <div className='search-bar-container'>
-            Searchbar
+            <SearchBarComp />
         </div>
     )
 }
