@@ -4,6 +4,8 @@ import './style.css'
 import SearchBarComp from '../SearchBarComp'
 import IconImage from '../../../public/images/icon.svg'
 
+import { headerPropInterface, childrenPropInterface } from '@/interface/pageInterface'
+
 const iconStyle = {
     width: "20px",
     height: "20px",
@@ -11,7 +13,6 @@ const iconStyle = {
 }
 
 const Icon = () => {
-    console.log(IconImage);
     return (
         <div className='icon-container'>
             <span>MovieHub</span>
@@ -28,20 +29,22 @@ const SearchBar = () => {
     )
 }
 
-const HeaderInfoText = () => {
+const HeaderInfoText: React.FC<childrenPropInterface> = ({ children }) => {
     return (
         <div className='header-info-container'>
-            Total X number of searhces appeared
+            {children}
         </div>
     )
 }
 
-export const Header = () => {
+export const Header: React.FC<headerPropInterface> = ({ movies, totalResults }) => {
     return (
         <div className='header-container'>
             <Icon />
             <SearchBar />
-            <HeaderInfoText />
+            <HeaderInfoText>
+                Total {totalResults} number of searches appeared
+            </HeaderInfoText>
         </div>
     )
 }
