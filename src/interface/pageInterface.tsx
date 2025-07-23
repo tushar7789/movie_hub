@@ -1,3 +1,5 @@
+import { SetStateAction } from "react"
+
 export interface movieItemInterface {
     Poster: string,
     Title: string,
@@ -12,9 +14,14 @@ export interface moviesListInterface {
 
 export interface headerPropInterface {
     movies: movieItemInterface[],
-    totalResults: string
+    totalResults: string,
+    setMovie: React.Dispatch<SetStateAction<string>>
 }
 
 export interface childrenPropInterface {
     children: React.ReactNode
+}
+
+export interface searchBarCompInterface {
+    setMovie: React.Dispatch<SetStateAction<string>>
 }

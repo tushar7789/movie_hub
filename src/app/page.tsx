@@ -4,12 +4,13 @@ import Header from "@/components/Header";
 import Content from "@/components/Content";
 import '@/app/globals.css'
 import { useEffect, useState } from "react";
-import { key, movie } from "@/config";
+import { key } from "@/config";
 import { movieItemInterface, moviesListInterface } from "@/interface/pageInterface";
 
 export default function Home() {
   const [moviesList, setMoviesList] = useState<movieItemInterface[]>([]);
   const [totalResults, setTotalResults] = useState<string>("");
+  const [movie, setMovie] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,12 +30,12 @@ export default function Home() {
 
     fetchData();
 
-  }, []);
+  }, [movie]);
 
   return (
     <div className='main-container'>
-      <Header movies={moviesList} totalResults={totalResults} />
-      <Content movies={moviesList} totalResults={totalResults} />
+      <Header movies={moviesList} totalResults={totalResults} setMovie={setMovie} />
+      <Content movies={moviesList} totalResults={totalResults} setMovie={setMovie} />
     </div>
   );
 }

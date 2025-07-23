@@ -9,8 +9,48 @@
 }
 
 .box-container {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     height: 100%;
-    width: 30%;
+    width: 27%;
     margin-left: 2vw;
+    background-color: #29272e;
+    border-radius: 10px;
+    /* color: white; */
+    padding-top: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-movielist-container {
+    height: 95%;
+    width: 100%;
+    border: 1px solid red;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    overflow-y: scroll;
+}
+
+.box-pagination-container {
+    height: 5%;
+    width: 90%;
+    border: 1px solid blue;
+    padding-right: 10px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.listitem-container {
+    height: 5vh;
+    width: 90%;
+    background-color: beige;
+    border-radius: 5px;
+
 }

@@ -21,10 +21,10 @@ const Icon = () => {
     )
 }
 
-const SearchBar = () => {
+const SearchBar: React.FC<childrenPropInterface> = ({ children }) => {
     return (
         <div className='search-bar-container'>
-            <SearchBarComp />
+            {children}
         </div>
     )
 }
@@ -37,13 +37,19 @@ const HeaderInfoText: React.FC<childrenPropInterface> = ({ children }) => {
     )
 }
 
-export const Header: React.FC<headerPropInterface> = ({ movies, totalResults }) => {
+export const Header: React.FC<headerPropInterface> = ({ movies, totalResults, setMovie }) => {
     return (
         <div className='header-container'>
             <Icon />
-            <SearchBar />
+            <SearchBar>
+                <SearchBarComp setMovie={setMovie} />
+            </SearchBar>
             <HeaderInfoText>
-                Total {totalResults} number of searches appeared
+                {
+                    totalResults === undefined ?
+                        <>No searches found</> :
+                        <>Total {totalResults} number of searches appeared</>
+                }
             </HeaderInfoText>
         </div>
     )
