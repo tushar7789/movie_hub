@@ -1,7 +1,7 @@
 .pagination-numbering-container {
     height: 90%;
     width: 20%;
-
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
