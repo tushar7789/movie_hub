@@ -41,3 +41,15 @@ export interface searchBarCompInterface {
 export interface movideDetailsPropsInterface {
     movieDetailsId: string
 }
+
+export interface movieDetailInterface {
+    title: string,
+    released: string,
+    runtime: string,
+    poster: string,
+    genre: string,
+    director: string,
+    starring: string,
+    plot: string,
+    imdbRating: string
+}
