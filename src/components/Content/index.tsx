@@ -2,6 +2,12 @@ import React from 'react'
 import './style.css'
 import { headerPropInterface, childrenPropInterface, movieItemInterface } from '@/interface/pageInterface';
 import Pagination from '../Pagination';
+import DefaultImage from '../../../public/images/default_image.png';
+
+const imgStyle = {
+    "height": "100%",
+    "width": "20%"
+}
 
 const ListItem: React.FC<childrenPropInterface> = ({ children }) => {
     return (
@@ -33,7 +39,11 @@ const Content: React.FC<headerPropInterface> = ({ movies, totalResults, setMovie
                             movies.map((ele: movieItemInterface, i: number) => (
                                 // <li key={ele["imdbID"]}>{ele["Title"]}</li>
                                 <ListItem key={ele["imdbID"]}>
-                                    {ele["Title"]}
+                                    <img src={ele["Poster"] !== "N/A" ? ele["Poster"] : DefaultImage.src} style={imgStyle} />
+                                    <div className="listitem-text-container">
+                                        <span>{ele["Title"]}</span>
+                                        <span>{ele["Year"]}</span>
+                                    </div>
                                 </ListItem>
                             ))
 
