@@ -18,10 +18,26 @@ export interface headerPropInterface {
     setMovie: React.Dispatch<SetStateAction<string>>
 }
 
+export interface contentPropInterface {
+    movies: movieItemInterface[],
+    totalResults: string,
+    movie: string
+}
+
+export interface listItemPropInterface {
+    children: React.ReactNode,
+    onClick: React.Dispatch<SetStateAction<string>>,
+    id: string
+}
+
 export interface childrenPropInterface {
     children: React.ReactNode
 }
 
 export interface searchBarCompInterface {
     setMovie: React.Dispatch<SetStateAction<string>>
+}
+
+export interface movideDetailsPropsInterface {
+    movieDetailsId: string
 }

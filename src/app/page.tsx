@@ -13,9 +13,13 @@ export default function Home() {
   const [movie, setMovie] = useState<string>("");
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://www.omdbapi.com/?apikey=${key}&s=${movie}`);
+        const res = await fetch(`http://www.omdbapi.com/?apikey=${key}&s=${movie}`,
+          { signal: controller.signal }
+        );
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
@@ -30,12 +34,16 @@ export default function Home() {
 
     fetchData();
 
+    return () => {
+      controller.abort();
+    }
+
   }, [movie]);
 
   return (
     <div className='main-container'>
       <Header movies={moviesList} totalResults={totalResults} setMovie={setMovie} />
-      <Content movies={moviesList} totalResults={totalResults} setMovie={setMovie} />
+      <Content movies={moviesList} totalResults={totalResults} movie={movie} />
     </div>
   );
 }
