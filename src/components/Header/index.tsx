@@ -2,15 +2,11 @@ import React from 'react'
 import './style.css'
 
 import SearchBarComp from '../SearchBarComp'
-import IconImage from '../../../public/images/icon.svg'
+import IconImage from '../../../public/images/icon.png'
 
 import { headerPropInterface, childrenPropInterface } from '@/interface/pageInterface'
 
-const iconStyle = {
-    width: "20px",
-    height: "20px",
-    marginLeft: "5px",
-}
+import { iconStyle } from '@/app/styles/styles'
 
 const Icon = () => {
     return (

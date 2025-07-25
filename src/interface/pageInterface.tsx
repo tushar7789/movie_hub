@@ -59,3 +59,15 @@ export interface ratingPropInterface {
     color: string,
     size: string
 }
+
+export interface ButtonInterface {
+    height: string,
+    width: string,
+    bgcolor: string,
+    text: string,
+    cursor: string,
+}
+
+export interface ButtonPropsInterface {
+    buttonProps: ButtonInterface
+}

@@ -9,11 +9,8 @@ import {
 import Pagination from '../Pagination';
 import DefaultImage from '../../../public/images/default_image.png';
 import MovieDetails from '../MovieDetails';
+import { imgStyle } from '@/app/styles/styles';
 
-const imgStyle = {
-    "height": "100%",
-    "width": "20%"
-}
 
 const ListItem: React.FC<listItemPropInterface> = ({ children, onClick, id }) => {
 

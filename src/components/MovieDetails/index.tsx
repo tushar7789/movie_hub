@@ -4,14 +4,13 @@ import DefaultImage from '../../../public/images/default_image.png'
 import { movideDetailsPropsInterface, movieDetailInterface } from '@/interface/pageInterface'
 import RatingStars from '../RatingStars'
 import { key } from '@/config'
+import Button from '../Button'
+import { movieDetailsImgStyle, buttonProps, span1Style, span2Style } from '@/app/styles/styles'
 
-const imgStyle = {
-    "height": "100%",
-    "width": "100%"
-}
 
 const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId }) => {
     const [movieDetails, setMovieDetails] = useState<movieDetailInterface>();
+    const [userRating, setUserRating] = useState();
 
     console.log("inside details:", movieDetailsId);
 
@@ -55,7 +54,7 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId })
                             movieDetails === undefined || movieDetails?.["poster"] === "N/A" ?
                                 DefaultImage.src : movieDetails["poster"]
                         }
-                        style={imgStyle} />
+                        style={movieDetailsImgStyle} />
                 </div>
                 <div className="details-info-container">
                     <span style={{ fontSize: "20px" }}>{movieDetails?.["title"]}</span>
@@ -65,7 +64,9 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId })
                 </div>
             </div>
             <div className="rating-container">
+                <p>Rate the movie</p>
                 <RatingStars maxCount={10} color={"red"} size={"15px"} />
+                <Button buttonProps={buttonProps} />
             </div>
             <div className="details-text-container">
                 <p
@@ -75,8 +76,8 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId })
                         width: "100%"
                     }}
                 >
-                    <span style={{ fontSize: "15px", marginBottom: "2px", fontStyle: "italic" }}>Directed By</span>
-                    <span style={{ fontSize: "13px" }}>{movieDetails?.["director"]}</span>
+                    <span style={span1Style}>Directed By</span>
+                    <span style={span2Style}>{movieDetails?.["director"]}</span>
                 </p>
                 <p
                     className='para-class'
@@ -85,8 +86,8 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId })
                         width: "100%"
                     }}
                 >
-                    <span style={{ fontSize: "15px", marginBottom: "2px", fontStyle: "italic" }}>Starring</span>
-                    <span style={{ fontSize: "13px" }}>{movieDetails?.["starring"]}</span>
+                    <span style={span1Style}>Starring</span>
+                    <span style={span2Style}>{movieDetails?.["starring"]}</span>
                 </p>
                 <p
                     className='para-class'
@@ -95,8 +96,8 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId })
                         width: "100%"
                     }}
                 >
-                    <span style={{ fontSize: "15px", marginBottom: "2px", fontStyle: "italic" }}>Plot</span>
-                    <span style={{ fontSize: "13px" }}>{movieDetails?.["plot"]}</span>
+                    <span style={span1Style}>Plot</span>
+                    <span style={span2Style}>{movieDetails?.["plot"]}</span>
                 </p>
             </div>
         </div>
