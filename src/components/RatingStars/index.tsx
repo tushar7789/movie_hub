@@ -6,16 +6,19 @@ import OpenStar from '../../../public/images/open_star.png'
 import { useState } from 'react';
 import { spanStyle } from '@/app/styles/styles';
 
-const RatingStars: React.FC<ratingPropInterface> = ({ maxCount, color = "yellow", size = "20px" }) => {
+const RatingStars: React.FC<ratingPropInterface> = ({ maxCount, color, size, setUserRating }) => {
     const [currentStar, setCurrentStar] = useState(0);
 
     const handleMouseEnter = (ind: any) => {
         setCurrentStar(currentStar => ind);
-        // console.log("bfbgg;", e.target.id);
     }
 
     const handleMouseLeave = () => {
         setCurrentStar(0);
+    }
+
+    const handleClick = (ind: any) => {
+        setUserRating(ind);
     }
 
     return (
@@ -25,28 +28,30 @@ const RatingStars: React.FC<ratingPropInterface> = ({ maxCount, color = "yellow"
                     <span
                         onMouseEnter={() => handleMouseEnter(ind + 1)}
                         onMouseLeave={handleMouseLeave}
+                        onClick={() => handleClick(ind + 1)}
                         className='rating-stars-span-container'
+                        key={ind}
                     >
                         {
                             currentStar >= (ind + 1) ?
                                 <img
                                     style={{ height: size, width: size }}
                                     src={ClosedStar.src} alt=""
+                                    id="closed_star"
                                 />
                                 : <img
                                     style={{ height: size, width: size }}
                                     src={OpenStar.src} alt=""
+                                    id="open_star"
                                 />
                         }
                     </span>
                 ))
             }
-            <span
-                style={spanStyle}>
+            <span style={spanStyle}>
                 &nbsp;
                 {
-                    currentStar === 0 ?
-                        "" : currentStar
+                    currentStar === 0 ? "" : currentStar
                 }
             </span>
         </div>

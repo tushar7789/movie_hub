@@ -5,14 +5,27 @@ import { movideDetailsPropsInterface, movieDetailInterface } from '@/interface/p
 import RatingStars from '../RatingStars'
 import { key } from '@/config'
 import Button from '../Button'
-import { movieDetailsImgStyle, buttonProps, span1Style, span2Style } from '@/app/styles/styles'
+import {
+    movieDetailsImgStyle,
+    movieDetailsLeftButtonStyle,
+    buttonProps,
+    span1Style,
+    span2Style,
+    para1Style,
+    para2Style,
+    para3Style
+} from '@/app/styles/styles'
+import ClosedLeftArrow from '../../../public/images/closed_left_arrow.png'
+import OpenLeftArrow from '../../../public/images/open_left_arrow.png'
 
 
-const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId }) => {
+const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, setFavListOpen }) => {
     const [movieDetails, setMovieDetails] = useState<movieDetailInterface>();
-    const [userRating, setUserRating] = useState();
+    const [userRating, setUserRating] = useState(-1);
 
-    console.log("inside details:", movieDetailsId);
+    const handleBackClick = () => {
+        setFavListOpen(true);
+    }
 
     useEffect(() => {
         const fetchMovieDetail = async () => {
@@ -45,6 +58,20 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId })
         fetchMovieDetail();
     }, [movieDetailsId])
 
+    useEffect(() => {
+        const idList = ["closed_star", "open_star", "add_fav_button"];
+        const handleStrayClick = (e: any) => {
+            if (!idList.includes(e.target.id))
+                setUserRating(-1);
+        }
+
+        document.addEventListener('click', handleStrayClick);
+
+        return () => {
+            document.removeEventListener('click', handleStrayClick);
+        }
+    }, []);
+
     return (
         <div className='movie-details-container'>
             <div className="details-card">
@@ -54,7 +81,14 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId })
                             movieDetails === undefined || movieDetails?.["poster"] === "N/A" ?
                                 DefaultImage.src : movieDetails["poster"]
                         }
-                        style={movieDetailsImgStyle} />
+                        style={movieDetailsImgStyle}
+                    />
+                    <img
+                        src={ClosedLeftArrow.src}
+                        alt=""
+                        style={movieDetailsLeftButtonStyle}
+                        onClick={handleBackClick}
+                    />
                 </div>
                 <div className="details-info-container">
                     <span style={{ fontSize: "20px" }}>{movieDetails?.["title"]}</span>
@@ -65,37 +99,23 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId })
             </div>
             <div className="rating-container">
                 <p>Rate the movie</p>
-                <RatingStars maxCount={10} color={"red"} size={"15px"} />
-                <Button buttonProps={buttonProps} />
+                <RatingStars maxCount={10} color={"red"} size={"15px"} setUserRating={setUserRating} />
+                {
+                    userRating !== -1 ?
+                        <Button buttonProps={buttonProps} /> :
+                        null
+                }
             </div>
             <div className="details-text-container">
-                <p
-                    className='para-class'
-                    style={{
-                        height: "20%",
-                        width: "100%"
-                    }}
-                >
+                <p className='para-class' style={para1Style}>
                     <span style={span1Style}>Directed By</span>
                     <span style={span2Style}>{movieDetails?.["director"]}</span>
                 </p>
-                <p
-                    className='para-class'
-                    style={{
-                        height: "30%",
-                        width: "100%"
-                    }}
-                >
+                <p className='para-class' style={para2Style}>
                     <span style={span1Style}>Starring</span>
                     <span style={span2Style}>{movieDetails?.["starring"]}</span>
                 </p>
-                <p
-                    className='para-class'
-                    style={{
-                        height: "50%",
-                        width: "100%"
-                    }}
-                >
+                <p className='para-class' style={para3Style}>
                     <span style={span1Style}>Plot</span>
                     <span style={span2Style}>{movieDetails?.["plot"]}</span>
                 </p>

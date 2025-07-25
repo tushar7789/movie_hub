@@ -27,7 +27,8 @@ export interface contentPropInterface {
 export interface listItemPropInterface {
     children: React.ReactNode,
     onClick: React.Dispatch<SetStateAction<string>>,
-    id: string
+    id: string,
+    setFavListOpen: React.Dispatch<SetStateAction<boolean>>
 }
 
 export interface childrenPropInterface {
@@ -39,7 +40,8 @@ export interface searchBarCompInterface {
 }
 
 export interface movideDetailsPropsInterface {
-    movieDetailsId: string
+    movieDetailsId: string,
+    setFavListOpen: React.Dispatch<SetStateAction<boolean>>
 }
 
 export interface movieDetailInterface {
@@ -57,7 +59,8 @@ export interface movieDetailInterface {
 export interface ratingPropInterface {
     maxCount: number,
     color: string,
-    size: string
+    size: string,
+    setUserRating: React.Dispatch<SetStateAction<number>>
 }
 
 export interface ButtonInterface {
@@ -70,4 +73,8 @@ export interface ButtonInterface {
 
 export interface ButtonPropsInterface {
     buttonProps: ButtonInterface
+}
+
+export interface favListPropsContainerInterface {
+    imdbID: string
 }

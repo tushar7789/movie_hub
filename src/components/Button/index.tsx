@@ -18,6 +18,7 @@ const Button: React.FC<ButtonPropsInterface> = ({ buttonProps: { height, width, 
     return (
         <div
             style={buttonStyle}
+            id="add_fav_button"
         >
             {text}
         </div>

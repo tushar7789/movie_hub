@@ -10,11 +10,13 @@ import Pagination from '../Pagination';
 import DefaultImage from '../../../public/images/default_image.png';
 import MovieDetails from '../MovieDetails';
 import { imgStyle } from '@/app/styles/styles';
+import FavList from '../Favlist';
 
 
-const ListItem: React.FC<listItemPropInterface> = ({ children, onClick, id }) => {
+const ListItem: React.FC<listItemPropInterface> = ({ children, onClick, id, setFavListOpen }) => {
 
     const handleClick = () => {
+        setFavListOpen(false);
         onClick(id);
     }
 
@@ -36,6 +38,7 @@ const Box: React.FC<childrenPropInterface> = ({ children }) => {
 const Content: React.FC<contentPropInterface> = ({ movies, totalResults, movie }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [movieDetailsId, setMovieDetailsId] = useState("");
+    const [favListOpen, setFavListOpen] = useState(true);
 
     useEffect(() => {
         if (movies === undefined) setIsLoading(true);
@@ -54,7 +57,12 @@ const Content: React.FC<contentPropInterface> = ({ movies, totalResults, movie }
                                 <span>Loading...</span>
                             :
                             movies?.map((ele: movieItemInterface, i: number) => (
-                                <ListItem key={ele["imdbID"]} onClick={setMovieDetailsId} id={ele["imdbID"]}>
+                                <ListItem
+                                    key={ele["imdbID"]}
+                                    onClick={setMovieDetailsId}
+                                    id={ele["imdbID"]}
+                                    setFavListOpen={setFavListOpen}
+                                >
                                     <img src={ele["Poster"] !== "N/A" ? ele["Poster"] : DefaultImage.src} style={imgStyle} />
                                     <div className="listitem-text-container">
                                         <span>{ele["Title"]}</span>
@@ -70,7 +78,14 @@ const Content: React.FC<contentPropInterface> = ({ movies, totalResults, movie }
                 </div>
             </Box>
             <Box>
-                <MovieDetails movieDetailsId={movieDetailsId} />
+                {
+                    favListOpen ?
+                        <FavList imdbID={movieDetailsId} /> :
+                        <MovieDetails
+                            movieDetailsId={movieDetailsId}
+                            setFavListOpen={setFavListOpen}
+                        />
+                }
             </Box>
         </div>
     )
