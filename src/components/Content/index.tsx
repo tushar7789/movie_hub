@@ -13,17 +13,30 @@ import { imgStyle } from '@/app/styles/styles';
 import FavList from '../Favlist';
 
 
-const ListItem: React.FC<listItemPropInterface> = ({ children, onClick, id, setFavListOpen }) => {
+export const ListItem: React.FC<listItemPropInterface> = ({ onClick, setFavListOpen, movies }) => {
 
-    const handleClick = () => {
+    const handleClick = (id: any) => {
         setFavListOpen(false);
-        onClick(id);
+        onClick?.(id);
     }
 
     return (
-        <div className='listitem-container' onClick={handleClick}>
-            {children}
-        </div>
+        <>
+            {
+                movies?.map((ele: movieItemInterface, i: number) => (
+                    <div
+                        key={ele["imdbID"] ? ele["imdbID"] : i}
+                        className='listitem-container'
+                        onClick={() => handleClick(ele["imdbID"])}
+                    >
+                        <img src={ele["poster"] !== "N/A" ? ele["poster"] : DefaultImage.src} style={imgStyle} />
+                        <div className="listitem-text-container">
+                            <span>{ele["title"]}</span>
+                            <span>{ele["year"]}</span>
+                        </div>
+                    </div>))
+            }
+        </>
     );
 }
 
@@ -35,7 +48,7 @@ const Box: React.FC<childrenPropInterface> = ({ children }) => {
     );
 }
 
-const Content: React.FC<contentPropInterface> = ({ movies, totalResults, movie }) => {
+const Content: React.FC<contentPropInterface> = ({ movies, totalResults, movie, setFavMovieList, favMoviesList }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [movieDetailsId, setMovieDetailsId] = useState("");
     const [favListOpen, setFavListOpen] = useState(true);
@@ -56,21 +69,11 @@ const Content: React.FC<contentPropInterface> = ({ movies, totalResults, movie }
                                 :
                                 <span>Loading...</span>
                             :
-                            movies?.map((ele: movieItemInterface, i: number) => (
-                                <ListItem
-                                    key={ele["imdbID"]}
-                                    onClick={setMovieDetailsId}
-                                    id={ele["imdbID"]}
-                                    setFavListOpen={setFavListOpen}
-                                >
-                                    <img src={ele["Poster"] !== "N/A" ? ele["Poster"] : DefaultImage.src} style={imgStyle} />
-                                    <div className="listitem-text-container">
-                                        <span>{ele["Title"]}</span>
-                                        <span>{ele["Year"]}</span>
-                                    </div>
-                                </ListItem>
-                            ))
-
+                            <ListItem
+                                onClick={setMovieDetailsId}
+                                setFavListOpen={setFavListOpen}
+                                movies={movies}
+                            />
                     }
                 </div>
                 <div className='box-pagination-container'>
@@ -80,10 +83,14 @@ const Content: React.FC<contentPropInterface> = ({ movies, totalResults, movie }
             <Box>
                 {
                     favListOpen ?
-                        <FavList imdbID={movieDetailsId} /> :
+                        <FavList
+                            favMoviesList={favMoviesList}
+                            setFavListOpen={setFavListOpen}
+                        /> :
                         <MovieDetails
                             movieDetailsId={movieDetailsId}
                             setFavListOpen={setFavListOpen}
+                            setFavMovieList={setFavMovieList}
                         />
                 }
             </Box>

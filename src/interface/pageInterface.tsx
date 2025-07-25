@@ -1,11 +1,18 @@
 import { SetStateAction } from "react"
 
 export interface movieItemInterface {
-    Poster: string,
-    Title: string,
-    Type: string,
-    Year: string,
-    imdbID: string
+    poster?: string,
+    title?: string,
+    type?: string,
+    year?: string,
+    imdbID?: string
+    released?: string,
+    runtime?: string,
+    genre?: string,
+    director?: string,
+    starring?: string,
+    plot?: string,
+    imdbRating?: string
 }
 
 export interface moviesListInterface {
@@ -21,14 +28,16 @@ export interface headerPropInterface {
 export interface contentPropInterface {
     movies: movieItemInterface[],
     totalResults: string,
-    movie: string
+    movie: string,
+    setFavMovieList: React.Dispatch<SetStateAction<movieItemInterface[]>>,
+    favMoviesList: movieItemInterface[]
 }
 
 export interface listItemPropInterface {
-    children: React.ReactNode,
-    onClick: React.Dispatch<SetStateAction<string>>,
-    id: string,
-    setFavListOpen: React.Dispatch<SetStateAction<boolean>>
+    onClick?: React.Dispatch<SetStateAction<string>>,
+    setFavListOpen: React.Dispatch<SetStateAction<boolean>>,
+    movies?: movieItemInterface[],
+    favList?: movideDetailsPropsInterface[]
 }
 
 export interface childrenPropInterface {
@@ -41,19 +50,8 @@ export interface searchBarCompInterface {
 
 export interface movideDetailsPropsInterface {
     movieDetailsId: string,
-    setFavListOpen: React.Dispatch<SetStateAction<boolean>>
-}
-
-export interface movieDetailInterface {
-    title: string,
-    released: string,
-    runtime: string,
-    poster: string,
-    genre: string,
-    director: string,
-    starring: string,
-    plot: string,
-    imdbRating: string
+    setFavListOpen: React.Dispatch<SetStateAction<boolean>>,
+    setFavMovieList: React.Dispatch<SetStateAction<movieItemInterface[]>>
 }
 
 export interface ratingPropInterface {
@@ -72,9 +70,11 @@ export interface ButtonInterface {
 }
 
 export interface ButtonPropsInterface {
-    buttonProps: ButtonInterface
+    buttonProps: ButtonInterface,
+    onClick: () => void;
 }
 
 export interface favListPropsContainerInterface {
-    imdbID: string
+    favMoviesList: movieItemInterface[],
+    setFavListOpen: React.Dispatch<SetStateAction<boolean>>,
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { ButtonPropsInterface } from '@/interface/pageInterface';
 
-const Button: React.FC<ButtonPropsInterface> = ({ buttonProps: { height, width, bgcolor, text, cursor } }) => {
+const Button: React.FC<ButtonPropsInterface> = ({ buttonProps: { height, width, bgcolor, text, cursor }, onClick }) => {
     const buttonStyle = {
         "height": height,
         "width": width,
@@ -19,6 +19,7 @@ const Button: React.FC<ButtonPropsInterface> = ({ buttonProps: { height, width, 
         <div
             style={buttonStyle}
             id="add_fav_button"
+            onClick={onClick}
         >
             {text}
         </div>

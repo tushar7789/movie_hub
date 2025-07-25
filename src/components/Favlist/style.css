@@ -1,5 +1,40 @@
 .favlist-container {
     height: 100%;
     width: 100%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.favlist-metadata {
+    box-sizing: border-box;
+    height: 90px;
+    width: 100%;
+    /* border: 1px solid yellow; */
+    background-color: #523973;
+    padding-left: 5%;
+}
+
+.favlist-metadata > p {
+    margin: 0;
+}
+
+.favlist-metadata > p#main-text {
+    font-size: 30px;
+    font-style: italic;
+    margin-bottom: 5%;
+    margin-top: 3%;
+}
+
+.favlist-metadata > p#additional-info {
+    font-size: 15px;
+}
+
+.favlist-list-container {
+    height: 80%;
+    width: 100%;
+    border: 1px solid yellow;
 }

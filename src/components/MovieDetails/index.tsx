@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './style.css'
 import DefaultImage from '../../../public/images/default_image.png'
-import { movideDetailsPropsInterface, movieDetailInterface } from '@/interface/pageInterface'
+import { movideDetailsPropsInterface, movieItemInterface } from '@/interface/pageInterface'
 import RatingStars from '../RatingStars'
 import { key } from '@/config'
 import Button from '../Button'
@@ -19,24 +19,47 @@ import ClosedLeftArrow from '../../../public/images/closed_left_arrow.png'
 import OpenLeftArrow from '../../../public/images/open_left_arrow.png'
 
 
-const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, setFavListOpen }) => {
-    const [movieDetails, setMovieDetails] = useState<movieDetailInterface>();
+const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, setFavListOpen, setFavMovieList }) => {
+    const [movieDetails, setMovieDetails] = useState<movieItemInterface>({});
     const [userRating, setUserRating] = useState(-1);
 
     const handleBackClick = () => {
         setFavListOpen(true);
     }
 
+    const handleButtonClick = () => {
+        setFavMovieList(favMovieList => {
+            return (
+                [
+                    ...favMovieList,
+                    {
+                        "poster": movieDetails["poster"],
+                        "title": movieDetails["title"],
+                        "type": "",
+                        "year": movieDetails["year"],
+                        "imdbID": movieDetails["imdbID"]
+                    }
+                ]
+            )
+        });
+
+        handleBackClick();
+    }
+
     useEffect(() => {
+        const controller = new AbortController();
+
         const fetchMovieDetail = async () => {
             try {
-                const res = await fetch(`http://www.omdbapi.com/?apikey=${key}&i=${movieDetailsId}`);
+                const res = await fetch(`http://www.omdbapi.com/?apikey=${key}&i=${movieDetailsId}`,
+                    { signal: controller.signal }
+                );
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
 
                 const data = await res.json();
-                const temp: movieDetailInterface = {
+                const temp: movieItemInterface = {
                     title: data["Title"],
                     released: data["Released"],
                     runtime: data["Runtime"],
@@ -56,6 +79,10 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
         }
 
         fetchMovieDetail();
+
+        return () => {
+            controller.abort();
+        }
     }, [movieDetailsId])
 
     useEffect(() => {
@@ -102,7 +129,10 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
                 <RatingStars maxCount={10} color={"red"} size={"15px"} setUserRating={setUserRating} />
                 {
                     userRating !== -1 ?
-                        <Button buttonProps={buttonProps} /> :
+                        <Button
+                            buttonProps={buttonProps}
+                            onClick={handleButtonClick}
+                        /> :
                         null
                 }
             </div>

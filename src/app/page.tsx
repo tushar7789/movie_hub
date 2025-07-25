@@ -12,6 +12,8 @@ export default function Home() {
   const [totalResults, setTotalResults] = useState<string>("");
   const [movie, setMovie] = useState<string>("");
 
+  const [favMovieList, setFavMovieList] = useState<movieItemInterface[]>([]);
+
   useEffect(() => {
     const controller = new AbortController();
 
@@ -43,7 +45,7 @@ export default function Home() {
   return (
     <div className='main-container'>
       <Header movies={moviesList} totalResults={totalResults} setMovie={setMovie} />
-      <Content movies={moviesList} totalResults={totalResults} movie={movie} />
+      <Content movies={moviesList} totalResults={totalResults} movie={movie} setFavMovieList={setFavMovieList} favMoviesList={favMovieList} />
     </div>
   );
 }
