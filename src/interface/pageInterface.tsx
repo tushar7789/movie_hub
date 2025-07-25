@@ -1,18 +1,11 @@
 import { SetStateAction } from "react"
 
 export interface movieItemInterface {
-    poster?: string,
-    title?: string,
-    type?: string,
-    year?: string,
-    imdbID?: string
-    released?: string,
-    runtime?: string,
-    genre?: string,
-    director?: string,
-    starring?: string,
-    plot?: string,
-    imdbRating?: string
+    poster: string,
+    title: string,
+    type: string,
+    year: string,
+    imdbID: string
 }
 
 export interface moviesListInterface {
@@ -34,10 +27,9 @@ export interface contentPropInterface {
 }
 
 export interface listItemPropInterface {
-    onClick?: React.Dispatch<SetStateAction<string>>,
+    onClick?: React.Dispatch<SetStateAction<string>> | undefined,
     setFavListOpen: React.Dispatch<SetStateAction<boolean>>,
-    movies?: movieItemInterface[],
-    favList?: movideDetailsPropsInterface[]
+    movies: movieItemInterface[],
 }
 
 export interface childrenPropInterface {
@@ -73,6 +65,29 @@ export interface ButtonPropsInterface {
     buttonProps: ButtonInterface,
     onClick: () => void;
 }
+
+export interface movieDetailInterface {
+    title: string,
+    released: string,
+    runtime: string,
+    poster: string,
+    genre: string,
+    director: string,
+    starring: string,
+    plot: string,
+    imdbRating: string,
+    type: string
+}
+
+// export interface favListItemInterface {
+//     released: string,
+//     runtime: string,
+//     genre: string,
+//     director: string,
+//     starring?: string,
+//     plot?: string,
+//     imdbRating?: string
+// }
 
 export interface favListPropsContainerInterface {
     favMoviesList: movieItemInterface[],

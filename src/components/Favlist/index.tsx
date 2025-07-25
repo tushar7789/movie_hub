@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 import { favListPropsContainerInterface } from '@/interface/pageInterface'
 import { ListItem } from '../Content'
+import UpArrow from '../../../public/images/up.png'
+import DownArrow from '../../../public/images/down.png'
+
+import { favListUpButtonStyle } from '@/app/styles/styles'
 
 const FavList: React.FC<favListPropsContainerInterface> = ({ favMoviesList, setFavListOpen }) => {
+    const [spin, setSpin] = useState(0);
 
     let imdbRatingAvg = 0;
     for (let i = 0; i < favMoviesList.length; i++) {
@@ -11,6 +16,13 @@ const FavList: React.FC<favListPropsContainerInterface> = ({ favMoviesList, setF
     }
 
     imdbRatingAvg /= favMoviesList?.length;
+
+    const handleSpinClick = () => {
+        setSpin(spin => (spin + 1) % 4);
+        setTimeout(() => {
+            setSpin(spin => (spin + 1) % 4);
+        }, 200);
+    }
 
     return (
         <div className='favlist-container'>
@@ -27,6 +39,18 @@ const FavList: React.FC<favListPropsContainerInterface> = ({ favMoviesList, setF
                             "No movies in favourites. Add One Now!"
                     }
                 </p>
+                <img
+                    src={UpArrow.src}
+                    alt=""
+                    style={favListUpButtonStyle}
+                    id="up_arrow"
+                    onClick={handleSpinClick}
+                    className={
+                        spin === 1 ? 'first-spin' :
+                            spin === 2 ? 'bottom-pos' :
+                                spin === 3 ? 'second-spin' : ''
+                    }
+                />
             </div>
             <div className="favlist-list-container">
                 <ListItem movies={favMoviesList} setFavListOpen={setFavListOpen} />
@@ -36,3 +60,26 @@ const FavList: React.FC<favListPropsContainerInterface> = ({ favMoviesList, setF
 }
 
 export default FavList;
+
+
+
+// {
+//     spin ?
+//         <img
+//             src={UpArrow.src}
+//             alt=""
+//             style={favListUpButtonStyle}
+//             id="up_arrow"
+//             onClick={handleSpinClick}
+//             className={spin ? 'spin-class' : ''}
+//         />
+//         :
+//         <img
+//             src={DownArrow.src}
+//             alt=""
+//             style={favListUpButtonStyle}
+//             id="up_arrow"
+//             onClick={handleSpinClick}
+//             className={!spin ? 'spin-class' : ''}
+//         />
+// }

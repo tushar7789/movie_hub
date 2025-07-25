@@ -67,3 +67,13 @@ export const spanStyle = {
     justifyContent: "center",
     alignItems: "center"
 }
+
+export const favListUpButtonStyle = {
+    "height": "25px",
+    "weight": "25px",
+    "zIndex": "2",
+    "position": "relative" as any,
+    "top": "-70px",
+    "left": "275px",
+    "cursor": "pointer"
+}

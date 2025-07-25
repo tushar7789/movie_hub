@@ -17,7 +17,7 @@ export const ListItem: React.FC<listItemPropInterface> = ({ onClick, setFavListO
 
     const handleClick = (id: any) => {
         setFavListOpen(false);
-        onClick?.(id);
+        if (onClick !== undefined) onClick(id);
     }
 
     return (
@@ -25,7 +25,7 @@ export const ListItem: React.FC<listItemPropInterface> = ({ onClick, setFavListO
             {
                 movies?.map((ele: movieItemInterface, i: number) => (
                     <div
-                        key={ele["imdbID"] ? ele["imdbID"] : i}
+                        key={ele["imdbID"]}
                         className='listitem-container'
                         onClick={() => handleClick(ele["imdbID"])}
                     >

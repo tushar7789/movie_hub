@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './style.css'
 import DefaultImage from '../../../public/images/default_image.png'
-import { movideDetailsPropsInterface, movieItemInterface } from '@/interface/pageInterface'
+import { movideDetailsPropsInterface, movieItemInterface, movieDetailInterface } from '@/interface/pageInterface'
 import RatingStars from '../RatingStars'
 import { key } from '@/config'
 import Button from '../Button'
@@ -18,10 +18,23 @@ import {
 import ClosedLeftArrow from '../../../public/images/closed_left_arrow.png'
 import OpenLeftArrow from '../../../public/images/open_left_arrow.png'
 
+const tempOBj = {
+    "title": "",
+    "released": "",
+    "runtime": "",
+    "poster": "",
+    "genre": "",
+    "director": "",
+    "starring": "",
+    "plot": "",
+    "imdbRating": "",
+    "type": ""
+}
 
 const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, setFavListOpen, setFavMovieList }) => {
-    const [movieDetails, setMovieDetails] = useState<movieItemInterface>({});
+    const [movieDetails, setMovieDetails] = useState<movieDetailInterface>(tempOBj);
     const [userRating, setUserRating] = useState(-1);
+    const [favMovieItem, setFavMovieItem] = useState<movieItemInterface>();
 
     const handleBackClick = () => {
         setFavListOpen(true);
@@ -29,18 +42,26 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
 
     const handleButtonClick = () => {
         setFavMovieList(favMovieList => {
+            let tempList = favMovieList.map((ele) => ele["imdbID"]).slice();
+
+            if (!tempList.includes(movieDetailsId)) {
+                return (
+                    [
+                        ...favMovieList,
+                        {
+                            "poster": movieDetails["poster"],
+                            "title": movieDetails["title"],
+                            "type": movieDetails["type"],
+                            "year": movieDetails["released"].split(' ')[2],
+                            "imdbID": movieDetailsId
+                        }
+                    ]
+                )
+            }
+
             return (
-                [
-                    ...favMovieList,
-                    {
-                        "poster": movieDetails["poster"],
-                        "title": movieDetails["title"],
-                        "type": "",
-                        "year": movieDetails["year"],
-                        "imdbID": movieDetails["imdbID"]
-                    }
-                ]
-            )
+                [...favMovieList]
+            );
         });
 
         handleBackClick();
@@ -59,7 +80,7 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
                 }
 
                 const data = await res.json();
-                const temp: movieItemInterface = {
+                const temp: movieDetailInterface = {
                     title: data["Title"],
                     released: data["Released"],
                     runtime: data["Runtime"],
@@ -68,11 +89,11 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
                     director: data["Director"],
                     starring: data["Actors"],
                     plot: data["Plot"],
-                    imdbRating: data["imdbRating"]
+                    imdbRating: data["imdbRating"],
+                    type: data["Type"]
                 }
                 console.log("aagyi bhaiya movie : ", data);
                 setMovieDetails(temp);
-
             } catch (err) {
                 console.log(err);
             }
@@ -105,7 +126,9 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
                 <div className="details-image-container">
                     <img
                         src={
-                            movieDetails === undefined || movieDetails?.["poster"] === "N/A" ?
+                            movieDetails === undefined ||
+                                movieDetails?.["poster"] === "N/A" ||
+                                movieDetails?.["poster"] === "" ?
                                 DefaultImage.src : movieDetails["poster"]
                         }
                         style={movieDetailsImgStyle}
