@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './style.css'
 import DefaultImage from '../../../public/images/default_image.png'
 import { movideDetailsPropsInterface, movieDetailInterface } from '@/interface/pageInterface'
+import RatingStars from '../RatingStars'
 import { key } from '@/config'
 
 const imgStyle = {
@@ -64,12 +65,39 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId })
                 </div>
             </div>
             <div className="rating-container">
-
+                <RatingStars maxCount={10} color={"red"} size={"15px"} />
             </div>
             <div className="details-text-container">
-                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</span>
-                <span>Nesciunt ut, modi est corporis officia sed repellendus alias porro fuga animi!</span>
-                <span>Eligendi impedit praesentium modi? Adipisci reiciendis non laudantium obcaecati iste.</span>
+                <p
+                    className='para-class'
+                    style={{
+                        height: "20%",
+                        width: "100%"
+                    }}
+                >
+                    <span style={{ fontSize: "15px", marginBottom: "2px", fontStyle: "italic" }}>Directed By</span>
+                    <span style={{ fontSize: "13px" }}>{movieDetails?.["director"]}</span>
+                </p>
+                <p
+                    className='para-class'
+                    style={{
+                        height: "30%",
+                        width: "100%"
+                    }}
+                >
+                    <span style={{ fontSize: "15px", marginBottom: "2px", fontStyle: "italic" }}>Starring</span>
+                    <span style={{ fontSize: "13px" }}>{movieDetails?.["starring"]}</span>
+                </p>
+                <p
+                    className='para-class'
+                    style={{
+                        height: "50%",
+                        width: "100%"
+                    }}
+                >
+                    <span style={{ fontSize: "15px", marginBottom: "2px", fontStyle: "italic" }}>Plot</span>
+                    <span style={{ fontSize: "13px" }}>{movieDetails?.["plot"]}</span>
+                </p>
             </div>
         </div>
     )

@@ -53,3 +53,9 @@ export interface movieDetailInterface {
     plot: string,
     imdbRating: string
 }
+
+export interface ratingPropInterface {
+    maxCount: number,
+    color: string,
+    size: string
+}
