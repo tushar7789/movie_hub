@@ -9,6 +9,7 @@ import { favListUpButtonStyle } from '@/app/styles/styles'
 
 const FavList: React.FC<favListPropsContainerInterface> = ({ favMoviesList, setFavListOpen }) => {
     const [spin, setSpin] = useState(0);
+    const [dropDown, setDropDown] = useState(0);
 
     let imdbRatingAvg = 0;
     for (let i = 0; i < favMoviesList.length; i++) {
@@ -19,9 +20,14 @@ const FavList: React.FC<favListPropsContainerInterface> = ({ favMoviesList, setF
 
     const handleSpinClick = () => {
         setSpin(spin => (spin + 1) % 4);
+        setDropDown(dropDown => (dropDown + 1) % 4);
+
         setTimeout(() => {
             setSpin(spin => (spin + 1) % 4);
         }, 200);
+        setTimeout(() => {
+            setDropDown(dropDown => (dropDown + 1) % 4);
+        }, 500);
     }
 
     return (
@@ -52,7 +58,19 @@ const FavList: React.FC<favListPropsContainerInterface> = ({ favMoviesList, setF
                     }
                 />
             </div>
-            <div className="favlist-list-container">
+            <div
+                className={
+                    `favlist-list-container
+                    ${dropDown === 0 ? "closed_pos" :
+                        dropDown === 1 ? "drop-down" :
+                            dropDown === 2 ? "open_pos" :
+                                dropDown === 3 ? "back-up" :
+                                    ""
+                    }
+                    `
+                }
+
+            >
                 <ListItem movies={favMoviesList} setFavListOpen={setFavListOpen} />
             </div>
         </div>
