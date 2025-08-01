@@ -55,6 +55,22 @@
     transform: scaleY(-1); 
 }
 
+.drop-down {
+  animation: drop-down 0.3s linear forwards;
+}
+
+.back-up {
+  animation: back-up 0.3s linear forwards;
+}
+
+.closed_pos {
+  height: 0;
+}
+
+.open_pos {
+  height: 80%;
+}
+
 /* ANIMATIONS */
 
 @keyframes first-spin {
@@ -79,4 +95,40 @@
           100% {
             transform: rotate(360deg);
           }
-        }
+  }
+
+@keyframes drop-down {
+  0% {
+    height : 0;
+  }
+  25% {
+    height : 20%;
+  }
+  50% {
+    height : 40%;
+  }
+  75% {
+    height : 60%;
+  }
+  100% {
+    height : 80%;
+  }
+}
+
+@keyframes back-up {
+  0% {
+    height : 80%;
+  }
+  25% {
+    height : 60%;
+  }
+  50% {
+    height : 40%;
+  }
+  75% {
+    height : 20%;
+  }
+  100% {
+    height : 0;
+  }
+}
