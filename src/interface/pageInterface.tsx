@@ -1,10 +1,10 @@
 import { SetStateAction } from "react"
 
 export interface movieItemInterface {
-    poster: string,
-    title: string,
-    type: string,
-    year: string,
+    Poster: string,
+    Title: string,
+    Type: string,
+    Year: string,
     imdbID: string
 }
 
@@ -13,7 +13,6 @@ export interface moviesListInterface {
 }
 
 export interface headerPropInterface {
-    movies: movieItemInterface[],
     totalResults: string,
     setMovie: React.Dispatch<SetStateAction<string>>
 }
@@ -22,14 +21,14 @@ export interface contentPropInterface {
     movies: movieItemInterface[],
     totalResults: string,
     movie: string,
-    setFavMovieList: React.Dispatch<SetStateAction<movieItemInterface[]>>,
-    favMoviesList: movieItemInterface[]
 }
 
 export interface listItemPropInterface {
     onClick?: React.Dispatch<SetStateAction<string>> | undefined,
-    setFavListOpen: React.Dispatch<SetStateAction<boolean>>,
+    setFavListOpen?: React.Dispatch<SetStateAction<boolean>> | undefined,
     movies: movieItemInterface[],
+    low: number,
+    high: number
 }
 
 export interface childrenPropInterface {
@@ -67,29 +66,26 @@ export interface ButtonPropsInterface {
 }
 
 export interface movieDetailInterface {
-    title: string,
-    released: string,
-    runtime: string,
-    poster: string,
-    genre: string,
-    director: string,
-    starring: string,
-    plot: string,
+    Title: string,
+    Released: string,
+    Runtime: string,
+    Poster: string,
+    Genre: string,
+    Director: string,
+    Starring: string,
+    Plot: string,
     imdbRating: string,
-    type: string
+    Type: string
 }
-
-// export interface favListItemInterface {
-//     released: string,
-//     runtime: string,
-//     genre: string,
-//     director: string,
-//     starring?: string,
-//     plot?: string,
-//     imdbRating?: string
-// }
 
 export interface favListPropsContainerInterface {
     favMoviesList: movieItemInterface[],
     setFavListOpen: React.Dispatch<SetStateAction<boolean>>,
+}
+
+export interface paginationPropInterface {
+    onClick?: React.Dispatch<SetStateAction<string>> | undefined,
+    movies: movieItemInterface[],
+    batches: number,
+    additionalDep: string[]
 }

@@ -4,7 +4,7 @@ import { ratingPropInterface } from '@/interface/pageInterface';
 import ClosedStar from '../../../public/images/closed_star.png';
 import OpenStar from '../../../public/images/open_star.png'
 import { useState } from 'react';
-import { spanStyle } from '@/app/styles/styles';
+import { spanStyle } from '@/styles/styles';
 
 const RatingStars: React.FC<ratingPropInterface> = ({ maxCount, color, size, setUserRating }) => {
     const [currentStar, setCurrentStar] = useState(0);

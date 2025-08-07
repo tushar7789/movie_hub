@@ -77,3 +77,19 @@ export const favListUpButtonStyle = {
     "left": "275px",
     "cursor": "pointer"
 }
+
+export const leftPaginationArrow = {
+    "height": "17px",
+    "weight": "17px",
+    "zIndex": "2",
+    "position": "relative" as any,
+    "cursor": "pointer"
+}
+
+export const rightPaginationArrow = {
+    "height": "17px",
+    "weight": "17px",
+    "zIndex": "2",
+    "position": "relative" as any,
+    "cursor": "pointer"
+}

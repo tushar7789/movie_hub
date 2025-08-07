@@ -34,17 +34,6 @@
     scrollbar-width: none;
 }
 
-.box-pagination-container {
-    height: 5%;
-    width: 90%;
-    /* border: 1px solid blue; */
-    padding-right: 5%;
-    padding-left: 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .listitem-container {
     box-sizing: border-box;
     height: 90px;

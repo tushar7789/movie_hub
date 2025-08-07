@@ -36,7 +36,7 @@
 .favlist-list-container {
     max-height: 80%;
     width: 100%;
-    border: 1px solid yellow;
+    border-bottom: 1px solid white;
 
     flex-flow: row wrap;
     overflow-y: scroll;
@@ -63,29 +63,17 @@
   animation: back-up 0.3s linear forwards;
 }
 
-.closed_pos {
+.closed-pos {
   height: 0;
 }
 
-.open_pos {
+.open-pos {
   height: 80%;
 }
 
 /* ANIMATIONS */
 
 @keyframes first-spin {
-          0% {
-            transform: rotate(0deg);
-          }
-          50% {
-            transform: rotate(90deg);
-          }
-          100% {
-            transform: rotate(180deg);
-          }
-        }
-
-@keyframes second-spin {
           0% {
             transform: rotate(180deg);
           }
@@ -94,6 +82,18 @@
           }
           100% {
             transform: rotate(360deg);
+          }
+}
+
+@keyframes second-spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          50% {
+            transform: rotate(90deg);
+          }
+          100% {
+            transform: rotate(180deg);
           }
   }
 

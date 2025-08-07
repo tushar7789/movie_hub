@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './style.css'
 import DefaultImage from '../../../public/images/default_image.png'
 import { movideDetailsPropsInterface, movieItemInterface, movieDetailInterface } from '@/interface/pageInterface'
-import RatingStars from '../RatingStars'
+import RatingStars from './ratingStars'
 import { key } from '@/config'
 import Button from '../Button'
 import {
@@ -14,21 +14,21 @@ import {
     para1Style,
     para2Style,
     para3Style
-} from '@/app/styles/styles'
+} from '@/styles/styles'
 import ClosedLeftArrow from '../../../public/images/closed_left_arrow.png'
 import OpenLeftArrow from '../../../public/images/open_left_arrow.png'
 
-const tempOBj = {
-    "title": "",
-    "released": "",
-    "runtime": "",
-    "poster": "",
-    "genre": "",
-    "director": "",
-    "starring": "",
-    "plot": "",
+const tempOBj: movieDetailInterface = {
+    "Title": "",
+    "Released": "",
+    "Runtime": "",
+    "Poster": "",
+    "Genre": "",
+    "Director": "",
+    "Starring": "",
+    "Plot": "",
     "imdbRating": "",
-    "type": ""
+    "Type": ""
 }
 
 const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, setFavListOpen, setFavMovieList }) => {
@@ -49,10 +49,10 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
                     [
                         ...favMovieList,
                         {
-                            "poster": movieDetails["poster"],
-                            "title": movieDetails["title"],
-                            "type": movieDetails["type"],
-                            "year": movieDetails["released"].split(' ')[2],
+                            "Poster": movieDetails["Poster"],
+                            "Title": movieDetails["Title"],
+                            "Type": movieDetails["Type"],
+                            "Year": movieDetails["Released"].split(' ')[2],
                             "imdbID": movieDetailsId
                         }
                     ]
@@ -81,16 +81,16 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
 
                 const data = await res.json();
                 const temp: movieDetailInterface = {
-                    title: data["Title"],
-                    released: data["Released"],
-                    runtime: data["Runtime"],
-                    poster: data["Poster"],
-                    genre: data["Genre"],
-                    director: data["Director"],
-                    starring: data["Actors"],
-                    plot: data["Plot"],
+                    Title: data["Title"],
+                    Released: data["Released"],
+                    Runtime: data["Runtime"],
+                    Poster: data["Poster"],
+                    Genre: data["Genre"],
+                    Director: data["Director"],
+                    Starring: data["Actors"],
+                    Plot: data["Plot"],
                     imdbRating: data["imdbRating"],
-                    type: data["Type"]
+                    Type: data["Type"]
                 }
                 console.log("aagyi bhaiya movie : ", data);
                 setMovieDetails(temp);
@@ -127,9 +127,9 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
                     <img
                         src={
                             movieDetails === undefined ||
-                                movieDetails?.["poster"] === "N/A" ||
-                                movieDetails?.["poster"] === "" ?
-                                DefaultImage.src : movieDetails["poster"]
+                                movieDetails?.["Poster"] === "N/A" ||
+                                movieDetails?.["Poster"] === "" ?
+                                DefaultImage.src : movieDetails["Poster"]
                         }
                         style={movieDetailsImgStyle}
                     />
@@ -141,9 +141,9 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
                     />
                 </div>
                 <div className="details-info-container">
-                    <span style={{ fontSize: "20px" }}>{movieDetails?.["title"]}</span>
-                    <span style={{ fontSize: "12px" }}>{movieDetails?.["released"]} &bull; {movieDetails?.["runtime"]}</span>
-                    <span style={{ fontSize: "12px" }}>{movieDetails?.["genre"]}</span>
+                    <span style={{ fontSize: "20px" }}>{movieDetails?.["Title"]}</span>
+                    <span style={{ fontSize: "12px" }}>{movieDetails?.["Released"]} &bull; {movieDetails?.["Runtime"]}</span>
+                    <span style={{ fontSize: "12px" }}>{movieDetails?.["Genre"]}</span>
                     <span style={{ fontSize: "12px" }}>⭐ {movieDetails?.["imdbRating"]} Rating</span>
                 </div>
             </div>
@@ -162,15 +162,15 @@ const MovieDetails: React.FC<movideDetailsPropsInterface> = ({ movieDetailsId, s
             <div className="details-text-container">
                 <p className='para-class' style={para1Style}>
                     <span style={span1Style}>Directed By</span>
-                    <span style={span2Style}>{movieDetails?.["director"]}</span>
+                    <span style={span2Style}>{movieDetails?.["Director"]}</span>
                 </p>
                 <p className='para-class' style={para2Style}>
                     <span style={span1Style}>Starring</span>
-                    <span style={span2Style}>{movieDetails?.["starring"]}</span>
+                    <span style={span2Style}>{movieDetails?.["Starring"]}</span>
                 </p>
                 <p className='para-class' style={para3Style}>
                     <span style={span1Style}>Plot</span>
-                    <span style={span2Style}>{movieDetails?.["plot"]}</span>
+                    <span style={span2Style}>{movieDetails?.["Plot"]}</span>
                 </p>
             </div>
         </div>

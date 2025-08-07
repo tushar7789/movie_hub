@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './style.css'
 import { favListPropsContainerInterface } from '@/interface/pageInterface'
-import { ListItem } from '../Content'
+import { ListItem } from '../Content/listitem'
 import UpArrow from '../../../public/images/up.png'
 import DownArrow from '../../../public/images/down.png'
 
-import { favListUpButtonStyle } from '@/app/styles/styles'
+import { favListUpButtonStyle } from '@/styles/styles'
 
 const FavList: React.FC<favListPropsContainerInterface> = ({ favMoviesList, setFavListOpen }) => {
     const [spin, setSpin] = useState(0);
@@ -52,8 +52,8 @@ const FavList: React.FC<favListPropsContainerInterface> = ({ favMoviesList, setF
                     id="up_arrow"
                     onClick={handleSpinClick}
                     className={
-                        spin === 1 ? 'first-spin' :
-                            spin === 2 ? 'bottom-pos' :
+                        spin == 0 ? 'bottom-pos' :
+                            spin === 1 ? 'first-spin' :
                                 spin === 3 ? 'second-spin' : ''
                     }
                 />
@@ -61,43 +61,25 @@ const FavList: React.FC<favListPropsContainerInterface> = ({ favMoviesList, setF
             <div
                 className={
                     `favlist-list-container
-                    ${dropDown === 0 ? "closed_pos" :
-                        dropDown === 1 ? "drop-down" :
-                            dropDown === 2 ? "open_pos" :
-                                dropDown === 3 ? "back-up" :
+                    ${dropDown === 0 ? "open-pos" :
+                        dropDown === 1 ? "back-up" :
+                            dropDown === 2 ? "closed-pos" :
+                                dropDown === 3 ? "drop-down" :
                                     ""
                     }
                     `
                 }
 
             >
-                <ListItem movies={favMoviesList} setFavListOpen={setFavListOpen} />
+                <ListItem
+                    movies={favMoviesList}
+                    setFavListOpen={setFavListOpen}
+                    low={0}
+                    high={favMoviesList.length - 1}
+                />
             </div>
         </div>
     )
 }
 
 export default FavList;
-
-
-
-// {
-//     spin ?
-//         <img
-//             src={UpArrow.src}
-//             alt=""
-//             style={favListUpButtonStyle}
-//             id="up_arrow"
-//             onClick={handleSpinClick}
-//             className={spin ? 'spin-class' : ''}
-//         />
-//         :
-//         <img
-//             src={DownArrow.src}
-//             alt=""
-//             style={favListUpButtonStyle}
-//             id="up_arrow"
-//             onClick={handleSpinClick}
-//             className={!spin ? 'spin-class' : ''}
-//         />
-// }
