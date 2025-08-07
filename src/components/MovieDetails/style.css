@@ -80,3 +80,32 @@
 
     /* border: 1px solid red; */
 }
+
+/* added after: rating stars styles */
+
+.rating-stars-container {
+    height: 40%;
+    width: 90%;
+    /* border: 1px solid red; */
+    margin-left: 5%;
+    margin-top: 3%;
+    margin-bottom: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.rating-stars-span-container {
+    height: 100%;
+    width: 10%;
+    /* border: 1px solid yellow; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rating-stars-span-container:hover {
+    cursor: pointer;
+}

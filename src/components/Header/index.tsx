@@ -1,12 +1,12 @@
 import React from 'react'
 import './style.css'
 
-import SearchBarComp from '../SearchBarComp'
+import SearchBarComp from './searchBar'
 import IconImage from '../../../public/images/icon.png'
 
 import { headerPropInterface, childrenPropInterface } from '@/interface/pageInterface'
 
-import { iconStyle } from '@/app/styles/styles'
+import { iconStyle } from '@/styles/styles'
 
 const Icon = () => {
     return (
@@ -33,7 +33,7 @@ const HeaderInfoText: React.FC<childrenPropInterface> = ({ children }) => {
     )
 }
 
-export const Header: React.FC<headerPropInterface> = ({ movies, totalResults, setMovie }) => {
+export const Header: React.FC<headerPropInterface> = ({ totalResults, setMovie }) => {
     return (
         <div className='header-container'>
             <Icon />
@@ -42,9 +42,9 @@ export const Header: React.FC<headerPropInterface> = ({ movies, totalResults, se
             </SearchBar>
             <HeaderInfoText>
                 {
-                    totalResults === undefined ?
+                    totalResults === "" ?
                         <>No searches found</> :
-                        <>Total {totalResults} number of searches appeared</>
+                        <>{totalResults} searches appeared</>
                 }
             </HeaderInfoText>
         </div>
